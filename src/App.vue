@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <div class = "nav-bar">
+            <span @click = "goTo('/')">Home</span>
+            <span @click = "goTo('/about')">About</span>
+            <span @click = "back">BACK</span>
+            <span @click = "goTo('/menu')">Menu</span>
+        </div>
+        <app-router name = "a1"></app-router>
+
+        <app-router name = "a2"></app-router>
+    </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+
+    methods: {
+      back() {
+          this.$backRoute();
+      },
+      goTo(route) {
+          this.$pushRoute(route);
+
+      }
+    },
+
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.nav-bar{
+    height: 60px;
+    width: 100%;
+
+    display: flex;
+
 }
+.nav-bar>span{
+    padding: 10px;
+    margin: 10px;
+
+    background-color: #5679ff;
+
+    color:white
+}
+
 </style>
