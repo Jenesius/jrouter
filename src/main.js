@@ -1,45 +1,43 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import AppRouter from './plugin';
+import JRouterVue from './plugin';
+
+
 import ViewHome from "./view/ViewHome";
 import ViewAbout from "./view/ViewAbout";
 import ViewMenu from "./view/ViewMenu";
+import ViewPlayer from "./view/ViewPlayer";
 
-// eslint-disable-next-line no-unused-vars
-const routes1 = {
 
-  "/": {
-    component: ViewHome,
-    nameRouter: 'a1',
-  },
-  "/about": {
-    component: ViewAbout,
-    nameRouter: 'a1',
-  },
-  "/menu": {
-    component: ViewMenu,
-    nameRouter: 'a2',
-    isSubView:true,
-  }
-};
 const routes = [
+  {
+    path: '',
+    components:{},
+  },
   {
     path:'/',
     components: {
-      'a1': ViewHome
+      'main': ViewHome
     },
   },
   {
     path: '/about',
     components: {
-      'a1': ViewAbout
+      'main': ViewAbout
     }
   },
   {
-    path: '/menu',
+    path: '#menu',
     components: {
-      'a2': ViewMenu
+      'menu': ViewMenu
+    },
+    isSubView: true
+  },
+  {
+    path: '#player',
+    components: {
+      'player': ViewPlayer
     },
     isSubView: true
   }
@@ -48,7 +46,10 @@ const routes = [
 
 Vue.config.productionTip = false;
 
-Vue.use(AppRouter, {
+Vue.use(JRouterVue, {
+  basic:{
+    removeHash: true,
+  },
   routes,
   // eslint-disable-next-line no-console
  // hook: (to, from) => console.log(to, from)

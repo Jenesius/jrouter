@@ -3,17 +3,22 @@
         <div class = "nav-bar">
             <span @click = "goTo('/')">Home</span>
             <span @click = "goTo('/about')">About</span>
+            <span @click = "goTo('#player')" class = "sub">Player</span>
             <span @click = "back">BACK</span>
-            <span @click = "goTo('/menu')">Menu</span>
+            <span @click = "goTo('#menu')">Menu</span>
         </div>
-        <app-router name = "a1"></app-router>
 
-        <app-router name = "a2"></app-router>
+        <j-router-view name="menu"></j-router-view>
+        <j-router-view name="player"></j-router-view>
+        <j-router-view name="main"></j-router-view>
+
+
     </div>
 
 </template>
 
 <script>
+
 
 export default {
   name: 'app',
@@ -47,5 +52,8 @@ export default {
 
     color:white
 }
+.sub{
+    padding: 2px !important;
 
+}
 </style>

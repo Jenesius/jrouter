@@ -1,33 +1,32 @@
-import AppRouter from "./AppRouter";
+import JRouterView from './jRouterView';
 import { listen, push, back } from "./history";
+
+import finder from "./finder";
 
 export default {
     install(Vue, options) {
-        Vue.component("AppRouter", AppRouter);
-        Vue.prototype.$routes = options.routes;
-        Vue.prototype.$pushRoute = (route) => {
 
-            // eslint-disable-next-line no-console
-            console.log('Push route:', route);
 
-            // eslint-disable-next-line no-unused-vars
-            function check(elem, index, arr){
-                if (elem.path === route){
-                    return true;
-                }
-                return  false;
+        if (options.basic){
+            if (options.basic.removeHash) {
+                history.replaceState(null, null, ' ');
             }
+        }
 
-            //Router
-            let _tmp = Vue.prototype.$routes.find(check);
 
-            // eslint-disable-next-line no-console
-            console.log('Push component', _tmp);
+        Vue.component("JRouterView", JRouterView);
+        Vue.prototype.$routes = options.routes;
+        Vue.prototype.$pushRoute = (routePath) => {
+
+            let _tmp = finder(Vue.prototype.$routes).findByPath(routePath);
 
             push(_tmp);
 
         };
-        Vue.prototype.$backRoute = back;
+        Vue.prototype.$backRoute = () => {
+
+            back();
+        };
 
         if (options.hook) {
             listen(options.hook);
