@@ -1,4 +1,4 @@
-import JRouterView from './jRouterView';
+import RouterView from './RouterView';
 import { listen, push, back } from "./history";
 
 import finder from "./finder";
@@ -14,7 +14,7 @@ export default {
         }
 
 
-        Vue.component("JRouterView", JRouterView);
+        Vue.component("RouterView", RouterView);
         Vue.prototype.$routes = options.routes;
         Vue.prototype.$pushRoute = (routePath) => {
 
@@ -23,9 +23,21 @@ export default {
             push(_tmp);
 
         };
-        Vue.prototype.$backRoute = () => {
+        Vue.prototype.$backRoute = (_str, type = null) => {
 
-            back();
+
+                switch (type) {
+                    case 'hash':
+                        if (window.location.hash === _str) back();
+                        break;
+                    case 'path':
+                        if (window.location.pathname === _str) back();
+                        break;
+                    default:
+                        back();
+                }
+
+
         };
 
         if (options.hook) {

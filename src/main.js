@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import JRouterVue from './plugin';
+import JVueRouter from './plugin';
 
 
 import ViewHome from "./view/ViewHome";
@@ -9,7 +9,7 @@ import ViewAbout from "./view/ViewAbout";
 import ViewMenu from "./view/ViewMenu";
 import ViewPlayer from "./view/ViewPlayer";
 
-
+// eslint-disable-next-line no-unused-vars
 const routes = [
   {
     path: '',
@@ -44,9 +44,10 @@ const routes = [
 ];
 
 
+
 Vue.config.productionTip = false;
 
-Vue.use(JRouterVue, {
+Vue.use(JVueRouter, {
   basic:{
     removeHash: true,
   },
