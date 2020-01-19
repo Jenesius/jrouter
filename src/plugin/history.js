@@ -9,7 +9,6 @@ function minRoute(route){
     return _obj;
 }
 
-
 export const push = (route) => {
 
     const previousRoute = window.location.pathname;
@@ -32,19 +31,24 @@ export const push = (route) => {
     }
 
 
-
-
-
-
-    listeners.forEach(listener => listener(route, previousRoute));
-
-
-
+    listeners.forEach(listener => listener.fn(route, previousRoute));
 
 };
 
-export const listen = fn => {
-    listeners.push(fn);
+export const listen = _obj => {
+    function check(){
+        listeners.forEach((elem, index) => {
+            if (elem.name === _obj.name){
+                listeners.splice(index, 1);
+
+            }
+        })
+    }
+
+    check();
+
+
+    listeners.push(_obj);
 };
 
 export const back = () => {

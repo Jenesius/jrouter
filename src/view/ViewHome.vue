@@ -6,15 +6,19 @@
 
 <script>
     export default {
-        name: "ViewHome"
+        name: "ViewHome",
+
     }
 </script>
 
 <style scoped>
 .home{
-    margin-top: 20px;
-    padding: 5px;
+    padding: 10px;
+
+    color:white;
+    font-weight: 600;
 
     background-color: coral;
+    border-radius: 6px;
 }
 </style>

@@ -2,30 +2,24 @@
     <div>
         <div class = "nav-bar">
             <span @click = "goTo('/')">Home</span>
+
             <span @click = "goTo('/about')">About</span>
-            <span @click = "goTo('#player')" class = "sub">Player</span>
+            <span @click = "goTo('/about/2lvl')">About2</span>
+            <span @click = "goTo('/about/2lvl/3lvl')">About3</span>
+
             <span @click = "back">BACK</span>
-            <span @click = "goTo('#menu')">Menu</span>
 
-            <span @click = "back1('#menu')">hash</span>
-            <span @click = "back2('/about')">path</span>
         </div>
-
-        <router-view name="menu"></router-view>
-        <router-view name="player"></router-view>
-        <router-view name="main"></router-view>
-
-
+        <router-view name="main"/>
     </div>
 
 </template>
 
 <script>
 
-
 export default {
   name: 'app',
-
+    components: {},
     methods: {
       back() {
           this.$backRoute();
@@ -33,12 +27,6 @@ export default {
       goTo(route) {
           this.$pushRoute(route);
       },
-      back1(str){
-          this.$backRoute(str, 'hash');
-      },
-        back2(str){
-            this.$backRoute(str, 'path');
-        },
     },
 
 }

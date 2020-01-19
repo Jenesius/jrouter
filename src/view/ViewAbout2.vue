@@ -1,19 +1,15 @@
 <template>
     <div class = "about">
-        <p>About</p>
+        <p>2 lvl</p>
 
-        <view-maska></view-maska>
-
+        <router-view name = "3lvl"></router-view>
     </div>
 </template>
 
 <script>
-    import ViewMaska from "./ViewMaska";
     export default {
-        name: "ViewAbout",
-        components: {ViewMaska},
+        name: "ViewAbout2",
         methods: {
-
         }
     }
 </script>
@@ -22,9 +18,10 @@
     .about{
         padding: 10px;
 
+        color:white;
         font-weight: 600;
 
-        background-color: #5ffa68;
+        background-color: #fa565d;
         border-radius: 6px;
     }
 </style>
