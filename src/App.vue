@@ -7,10 +7,21 @@
             <span @click = "goTo('/about/2lvl')">About2</span>
             <span @click = "goTo('/about/2lvl/3lvl')">About3</span>
 
+            <span @click = "goTo('#menu')">Menu</span>
+            <span @click = "goTo('#player')">Player</span>
+
+
+
             <span @click = "back">BACK</span>
+
+            <span @click = "checkBack('#menu')">CheckBack #menu</span>
+            <span @click = "checkBack('/about/2lvl')">CheckBack /about/2lvl</span>
 
         </div>
         <router-view name="main"/>
+
+        <router-view name = "menu"/>
+        <router-view name = "player"/>
     </div>
 
 </template>
@@ -27,6 +38,9 @@ export default {
       goTo(route) {
           this.$pushRoute(route);
       },
+        checkBack(str){
+          this.$backRoute(str);
+        }
     },
 
 }

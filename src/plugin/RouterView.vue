@@ -12,7 +12,6 @@
             return {
                 current: window.location.pathname ,
                 name:"",
-                isSub:false,
             };
         },
         created() {
@@ -23,38 +22,28 @@
                 name: this.name,
                 // eslint-disable-next-line no-unused-vars
                 fn: (route, previousRoute) => {
-                //Проверка, должен ли данный контейнер иметь в себе компоненту по данному пути
-                //Принимает конфигурацию роута и название ДАННОГО контейнера
-                // eslint-disable-next-line no-unused-vars
-                function check(router, nameRouter){
-                    return router.components.hasOwnProperty(nameRouter);
-                }
 
 
-                this.current = route.path;
-                return;
+                    // eslint-disable-next-line no-console
+                    //Если это hash, основные router не изменяем
+                    if (route.path[0] === '#'){
+                        //Если в путь содержит данный router
 
+                        //Если этот роутер уже содержит побочный путь
+                        if (this.current[0] === '#'){
+                            this.current = route.path;
+                        }
 
+                         if (route.components.hasOwnProperty(this.name) ){
+                            this.current = route.path;
+                         }
 
-                //С неглавной на неглавную
-                // eslint-disable-next-line no-unreachable
-                if (this.isSub && route.isSubView){
-                    if (check(route, this.name) === false){
-                        this.current = '';
+                        return;
                     }
-                }
-                //Если роутер относится к контейнеру
-                if (check(route, this.name)){
+
                     this.current = route.path;
-                    this.isSub = route.isSubView;
+
                 }
-                else{
-                    if(this.isSub && (route.isSubView === false || route.isSubView === undefined)){
-                        this.current = '';
-                        this.isSub = false;
-                    }
-                }
-            }
             });
             window.addEventListener(
                 "popstate",
@@ -69,8 +58,9 @@
                 function find(arr, path, name){
 
                     /*
-                    * Начинаем идти с конца, т.к. Если в маршруте поменяется компонента в
-                    * родительском роуте, мы это заметим первее
+                    * Начинаме с конца т.к. сперва обрабатываем узкие роуты, затем широки
+                    * Сперва /api/users/positions
+                    * В конце /api
                     * */
 
                     // eslint-disable-next-line for-direction

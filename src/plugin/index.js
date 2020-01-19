@@ -40,7 +40,11 @@ export default {
         }
 
         Vue.component("RouterView", RouterView);
+
+        //Modify Router Array
         Vue.prototype.$routes = update(options.routes);
+
+
         Vue.prototype.$pushRoute = (routePath) => {
 
             let _tmp = finder(Vue.prototype.$routes).findByPath(routePath);
@@ -48,17 +52,22 @@ export default {
             push(_tmp);
 
         };
-        Vue.prototype.$backRoute = (_str, type = null) => {
 
-                switch (type) {
-                    case 'hash':
+        //Если указать проверку, то переход назад состоится лишь тогда,
+        // когда текущий путь равен полученному
+        Vue.prototype.$backRoute = (_str ) => {
+            if (_str === undefined) {
+                back();
+                return;
+            }
+
+            switch (_str[0]) {
+                    case '#':
                         if (window.location.hash === _str) back();
                         break;
-                    case 'path':
+                    case '/':
                         if (window.location.pathname === _str) back();
                         break;
-                    default:
-                        back();
                 }
 
         };

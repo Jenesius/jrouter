@@ -14,7 +14,7 @@ export const push = (route) => {
     const previousRoute = window.location.pathname;
     const previousHash = window.location.hash;
 
-    if(route.isSubView){
+    if(route.path[0] === '#'){
         if (window.location.hash){
             window.history.replaceState(minRoute(route), null, previousRoute + route.path );
         }else{

@@ -8,6 +8,8 @@ import ViewHome from "./view/ViewHome";
 import ViewAbout from "./view/ViewAbout";
 import ViewAbout2 from "./view/ViewAbout2";
 import ViewAbout3 from "./view/ViewAbout3";
+import ViewMenu from "./view/hash/ViewMenu";
+import ViewPlayer from "./view/hash/ViewPlayer";
 
 
 
@@ -58,6 +60,18 @@ const routes = [
       },
     ]
   },
+  {
+    path: '#menu',
+    components: {
+      'menu': ViewMenu
+    },
+  },
+  {
+    path: '#player',
+    components: {
+      'player': ViewPlayer
+    },
+  }
 
 
 ];
