@@ -1,7 +1,10 @@
 import RouterView from './RouterView';
+import RouterLink from "./RouterLink";
+
 import { listen, push, back } from "./history";
 
 import finder from "./finder";
+
 
 function update(routes){
 
@@ -40,6 +43,7 @@ export default {
         }
 
         Vue.component("RouterView", RouterView);
+        Vue.component("RouterLink", RouterLink);
 
         //Modify Router Array
         Vue.prototype.$routes = update(options.routes);

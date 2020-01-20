@@ -17,6 +17,13 @@
             <span @click = "checkBack('#menu')">CheckBack #menu</span>
             <span @click = "checkBack('/about/2lvl')">CheckBack /about/2lvl</span>
 
+
+            <router-link to="/about/2lvl/3lvl" >
+                <div class = "linkA">
+                    <p>sfsdf</p>
+                </div>
+            </router-link>
+
         </div>
         <router-view name="main"/>
 
@@ -54,6 +61,18 @@ export default {
     display: flex;
 
 }
+
+.linkA{
+    height: 45px;
+    width: 45px;
+
+    background-color: yellow;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .nav-bar>span{
     padding: 10px;
     margin: 10px;
