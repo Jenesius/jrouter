@@ -18,14 +18,14 @@ const routes = [
     path:'/',
     components: {
       'main': ViewHome
-    },
-    redirect: '/about/2lvl',
+    }
   },
   {
     path: '/about',
     components: {
       'main': ViewAbout
     },
+    redirect: '/about/2lvl',
     children: [
       {
         path: '/2lvl',
@@ -38,6 +38,7 @@ const routes = [
             components: {
               '3lvl': ViewAbout3
             },
+
           },
         ]
       },

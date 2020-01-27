@@ -23,7 +23,6 @@
                 // eslint-disable-next-line no-unused-vars
                 fn: (route, previousRoute) => {
 
-                    // eslint-disable-next-line no-console
                     //Если это hash, основные router не изменяем
                     if (route.path[0] === '#'){
                         //Если в путь содержит данный router
@@ -62,7 +61,7 @@
                     * В конце /api
                     * */
 
-                    // eslint-disable-next-line for-direction
+
                     for(let i = arr.length -1; i >=0 ; i--){
                         if (path === '/' || arr[i].path === '/'){
                             if (path === arr[i].path)
