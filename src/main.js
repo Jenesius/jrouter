@@ -19,6 +19,7 @@ const routes = [
     components: {
       'main': ViewHome
     },
+    redirect: '/about/2lvl',
   },
   {
     path: '/about',
@@ -72,10 +73,7 @@ const routes = [
       'player': ViewPlayer
     },
   }
-
-
 ];
-
 
 
 Vue.config.productionTip = false;
@@ -90,6 +88,5 @@ Vue.use(JVueRouter, {
 });
 
 new Vue({
-  routes,
   render: h => h(App),
 }).$mount('#app')

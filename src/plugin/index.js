@@ -19,6 +19,11 @@ function update(routes){
             components: elem.components,
         });
 
+        if (elem.hasOwnProperty('redirect')){
+            _arr[_arr.length -1].redirect = elem.redirect;
+        }
+
+
         if (elem.children !== undefined){
             elem.children.forEach(elem => {
                 goTo(elem, modifyPath);
@@ -31,9 +36,23 @@ function update(routes){
 
     return _arr;
 }
+function checkRedirect(routes, totalURL){
+
+
+
+    let currentElem = routes.find(elem =>   elem.path === totalURL);
+
+    if (currentElem.hasOwnProperty('redirect')){
+        return currentElem.redirect;
+    }
+    return false;
+}
 
 export default {
     install(Vue, options) {
+
+
+
 
         //Если установлен мод RemoveHash при первом запуске #hash будет удалён
         if (options.basic){
@@ -42,14 +61,34 @@ export default {
             }
         }
 
-        Vue.component("RouterView", RouterView);
-        Vue.component("RouterLink", RouterLink);
+
+
 
         //Modify Router Array
         Vue.prototype.$routes = update(options.routes);
 
+        let _tmp = checkRedirect(Vue.prototype.$routes, window.location.pathname + window.location.hash);
+
+        if (_tmp ){
+            // eslint-disable-next-line no-console
+            history.replaceState(null, null, _tmp);
+        }
+
+
+        Vue.component("RouterView", RouterView);
+        Vue.component("RouterLink", RouterLink);
+
+
+
+
 
         Vue.prototype.$pushRoute = (routePath) => {
+
+            let test = checkRedirect(Vue.prototype.$routes, routePath);
+
+            if (test ){
+                routePath = test;
+            }
 
             let _tmp = finder(Vue.prototype.$routes).findByPath(routePath);
 

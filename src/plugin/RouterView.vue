@@ -23,7 +23,6 @@
                 // eslint-disable-next-line no-unused-vars
                 fn: (route, previousRoute) => {
 
-
                     // eslint-disable-next-line no-console
                     //Если это hash, основные router не изменяем
                     if (route.path[0] === '#'){
@@ -82,7 +81,8 @@
 
                 let _tmp = find(this.$routes, this.current, this.name);
 
-                if (_tmp === false)
+
+                if (_tmp === false )
                     return;
 
                 return (_tmp.components[this.name]) ;
