@@ -8,17 +8,16 @@ import { listen, push, back } from "./history";
 export default {
     install(Vue, options) {
 
+        /*Устанавливаем конечные пути*/
+        Vue.prototype.$routes = RouterWorker.adaptationRoutes(options.routes);
+
         //Если установлен мод RemoveHash при первом запуске #hash будет удалён
         if (options.basic){
             if (options.basic.removeHash)
                 RouterWorker.replaceState(' ');
         }
 
-
-        Vue.prototype.$routes = RouterWorker.adaptationRoutes(options.routes);
-
-
-
+        /*Проверка на редирект*/
         let _tmp = RouterWorker.checkRedirect(Vue.prototype.$routes, window.location.pathname + window.location.hash);
         RouterWorker.replaceState(_tmp);
 
@@ -26,6 +25,7 @@ export default {
         /*Добавляем дефолтные компоненты для роутинга*/
         Vue.component("RouterView", RouterView);
         Vue.component("RouterLink", RouterLink);
+
 
 
         Vue.prototype.$pushRoute = (routePath) => {

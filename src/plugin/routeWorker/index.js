@@ -68,6 +68,11 @@ class RouterWorker{
         history.replaceState(null, null, url);
     }
 
+    getMinimalRoute( route ){
+        return {
+            path: route.path,
+        };
+    }
 
 }
 

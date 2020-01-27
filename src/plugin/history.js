@@ -1,35 +1,31 @@
+import RouterWorker from "./routeWorker"
+
 const listeners = [];
-
-function minRoute(route){
-
-    let _obj = {
-        path: route.path,
-    };
-
-    return _obj;
-}
 
 export const push = (route) => {
 
     const previousRoute = window.location.pathname;
     const previousHash = window.location.hash;
 
+
+    /*Если текущий путь - hash*/
     if(route.path[0] === '#'){
+        //Если предыдщий путь тоже был хэшем
+        //Значит заменяем хэши
         if (window.location.hash){
-            window.history.replaceState(minRoute(route), null, previousRoute + route.path );
+            window.history.replaceState(RouterWorker.getMinimalRoute(route), null, previousRoute + route.path );
         }else{
-            window.history.pushState(minRoute(route), null, previousRoute + route.path );
+            window.history.pushState(RouterWorker.getMinimalRoute(route), null, previousRoute + route.path );
         }
     }
     else{
-        //Идём с не галвного, на глвынй
+        //Идём с не главного, на глвынй
         if (previousHash){
-            window.history.replaceState(minRoute(route), null, route.path);
+            window.history.replaceState(RouterWorker.getMinimalRoute(route), null, route.path);
         }else{
-            window.history.pushState(minRoute(route), null, route.path);
+            window.history.pushState(RouterWorker.getMinimalRoute(route), null, route.path);
         }
     }
-
 
     listeners.forEach(listener => listener.fn(route, previousRoute));
 
@@ -52,8 +48,6 @@ export const listen = _obj => {
 };
 
 export const back = () => {
-
     window.history.back();
-
 
 };
